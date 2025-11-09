@@ -1,0 +1,32 @@
+
+spring:
+  datasource: 
+   # H2 資料庫設定
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: "" 
+
+  # H2 Console http://localhost:8080/h2-console
+  h2:
+    console:
+      enabled: true
+
+  # JPA 設定
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+
+  # 確保 Spring Boot 總是執行 schema.sql 和 data.sql
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
