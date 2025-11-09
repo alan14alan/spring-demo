@@ -18,6 +18,7 @@ POST http://localhost:8080/api/v1/currency 新增
 PUT http://localhost:8080/api/v1/currency/{code} update by code
 
 {
+ "code":"USD",
  "chineseName":"新美元"
 }
 
