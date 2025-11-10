@@ -58,7 +58,7 @@ public class CurrencyControllerTest {
 
 		String actualJson = result.getResponse().getContentAsString();
 
-		// 4. JSONAssert 比對
+		// JSONAssert 比對
 		JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.NON_EXTENSIBLE);
 		System.out.println(actualJson);
 	}

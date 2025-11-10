@@ -48,7 +48,7 @@ public class CoinDeskApiService {
 		String formattedTime = odt.atZoneSameInstant(ZoneId.systemDefault()).format(formatter);
 		response.setUpdateTime(formattedTime);
 
-		// 步驟 3: 組合幣別資訊
+		// 3.組合幣別資訊
 
 		List<Currency> currencyList = currencyRepository.findAll();
 

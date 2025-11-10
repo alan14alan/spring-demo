@@ -3,7 +3,10 @@ package com.iisi.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iisi.spring_demo.SpringDemoApplication;
 import com.iisi.spring_demo.model.dto.CoinDeskResponse;
+import com.iisi.spring_demo.model.dto.TransformedResponse;
+import com.iisi.spring_demo.model.entity.Currency;
 import com.iisi.spring_demo.repository.CurrencyRepository;
+import com.iisi.spring_demo.service.CoinDeskApiService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +19,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,6 +46,12 @@ public class CoinDeskApiControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
+	@Autowired
+	private CoinDeskApiService coinDeskApiService;
+
+	@Autowired
+	private CurrencyRepository currencyRepository;
+
 	/**
 	 * 測試 3: 測試呼叫 coindesk API，並顯示其內容
 	 */
@@ -54,10 +69,11 @@ public class CoinDeskApiControllerTest {
 	void testGetTransformedCoinDeskData() throws Exception {
 
 		System.out.println("--- 測試 4: 呼叫轉換後 API (/transformed) ---");
+
 		mockMvc.perform(get("/api/v1/coindesk/transformed")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.updateTime").exists()) // 驗證時間存在
 				.andExpect(jsonPath("$.currencies[0].code").exists())
-				.andExpect(jsonPath("$.currencies[0].chineseName").exists()) // 來自 data.sql
+				.andExpect(jsonPath("$.currencies[0].chineseName").exists())
 				.andExpect(jsonPath("$.currencies[0].rate").exists())
 				.andDo(result -> System.out.println(result.getResponse().getContentAsString()));
 	}
