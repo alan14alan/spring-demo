@@ -1,8 +1,6 @@
 # spring-demo
 初始化SQL在resource內 data.sql及scheme.sql
 
-H2 Console http://localhost:8080/h2-console
-
 API
 
 幣別資料表 CRUD API
